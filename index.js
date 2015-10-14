@@ -31,9 +31,9 @@ var DEFAULT_PADDING = 2
 
 var typeIsAlias = pipe(prop('type'), equals('alias'))
 var getAliases = pipe(
-  filter(typeIsAlias),
-  pluck('value'),
-  flatten
+	filter(typeIsAlias),
+	pluck('value'),
+	flatten
 )
 var typeIsMeta = pipe(prop('type'), equals('meta'))
 function normalizeMeta (raw) {
@@ -98,80 +98,80 @@ function pad (str) {
 
 var exports = module.exports = function usage () {
 
-  // TODO: enable/disable type as command or flag
+	// TODO: enable/disable type as command or flag
 
-  var options = asArray(arguments)
+	var options = asArray(arguments)
 
-  return app(
-  	flag(
-  		alias.apply(null, _usageAlias(options)),
-  		handler(function (value, context) {
+	return app(
+		flag(
+			alias.apply(null, _usageAlias(options)),
+			handler(function (value, context) {
 
-  			var intro = normalizeMeta(options).description
-  			var example = normalizeMeta(options).example
-  			var flags = usageTreeFor(context.tree.flag)
-  			var commands = pipe(
-  				usageTreeFor,
-  				map(c => [c.alias.join(', '), c.description]),
-  				fromPairs
-  			)(context.tree.command)
+				var intro = normalizeMeta(options).description
+				var example = normalizeMeta(options).example
+				var flags = usageTreeFor(context.tree.flag)
+				var commands = pipe(
+					usageTreeFor,
+					map(c => [c.alias.join(', '), c.description]),
+					fromPairs
+				)(context.tree.command)
 
-  			var flags = pipe(
-  				usageTreeFor,
-  				map(f => [f.alias.join(', '), f.description]),
-  				fromPairs
-  			)(context.tree.flag)
+				var flags = pipe(
+					usageTreeFor,
+					map(f => [f.alias.join(', '), f.description]),
+					fromPairs
+				)(context.tree.flag)
 
-  			// TOOD: default to console.log, but allow options to be passed in
-  			//       to override that
+				// TOOD: default to console.log, but allow options to be passed in
+				//       to override that
 
-  			if (intro !== undefined) {
-	  			console.log('')
-	  			console.log(intro.join('\n'))
-  			}
+				if (intro !== undefined) {
+					console.log('')
+					console.log(intro.join('\n'))
+				}
 
-  			if (example !== undefined) {
-	  			console.log('')
-	  			console.log('Usage:' + '\n');
-	  			console.log(pad(example.join('\n')))
-  			}
+				if (example !== undefined) {
+					console.log('')
+					console.log('Usage:' + '\n');
+					console.log(pad(example.join('\n')))
+				}
 
-  			if (Object.keys(commands).length > 0) {
-	  			console.log('')
-	  			console.log('Commands:' + '\n');
-	  			printWithDescriptions(commands)
-  			}
+				if (Object.keys(commands).length > 0) {
+					console.log('')
+					console.log('Commands:' + '\n');
+					printWithDescriptions(commands)
+				}
 
-  			if (Object.keys(flags).length > 0) {
-	  			console.log('')
-	  			console.log('Options:' + '\n');
-	  			printWithDescriptions(flags)
-  			}
+				if (Object.keys(flags).length > 0) {
+					console.log('')
+					console.log('Options:' + '\n');
+					printWithDescriptions(flags)
+				}
 
-  			exit(0)
-  		})
-  	)()
-  )()
+				exit(0)
+			})
+		)()
+	)()
 }
 
 exports.description = function description (input) {
 
-  return {
-    type: 'meta',
-    value: {
-    	type: 'description',
-    	value: input
-    }
-  }
+	return {
+		type: 'meta',
+		value: {
+			type: 'description',
+			value: input
+		}
+	}
 }
 
 exports.example = function example (input) {
 
 	return {
-	  type: 'meta',
-	  value: {
-	  	type: 'example',
-	  	value: input
-	  }
+		type: 'meta',
+		value: {
+			type: 'example',
+			value: input
+		}
 	}
 }
