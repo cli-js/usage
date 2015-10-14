@@ -1,0 +1,33 @@
+{
+  "name": "@cli/usage",
+  "version": "0.3.0",
+  "description": "usage",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo '1'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cli-js/usage.git"
+  },
+  "keywords": [
+    "cli",
+    "usage",
+    "command",
+    "flag",
+    "interface",
+    "help"
+  ],
+  "author": "Scott Corgan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cli-js/usage/issues"
+  },
+  "homepage": "https://github.com/cli-js/usage#readme",
+  "dependencies": {
+    "as-array": "^2.0.0",
+    "exit": "^0.1.2",
+    "pretty-print": "^1.1.0",
+    "ramda": "^0.18.0"
+  }
+}
